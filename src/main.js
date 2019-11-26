@@ -4,7 +4,7 @@ import "@/config/axios";
 import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
-import "animate.css/animate.min.css";
+import "animate.css/animate.min.css"; //58 kB ev beetje trimmen
 import Vuelidate from "vuelidate";
 import Toasted from "vue-toasted";
 

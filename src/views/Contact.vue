@@ -67,7 +67,7 @@
         </p>
         <p
           class="text-red-500 mt-1 text-xs italic"
-          v-visible="!$v.bericht.maxLength"
+          v-visible="$v.bericht.$dirty && !$v.bericht.maxLength"
         >
           Het bericht is te lang!
         </p>

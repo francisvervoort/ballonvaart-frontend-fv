@@ -3,7 +3,6 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Contact from "./views/Contact.vue";
 
-
 Vue.use(Router);
 
 export default new Router({
@@ -12,13 +11,13 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",   
+      name: "home",
       component: Home
     },
-   {
-    path: "/contact",
-    name: "contact",
-    component: Contact   
+    {
+      path: "/contact",
+      name: "contact",
+      component: Contact
     }
   ]
 });
