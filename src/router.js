@@ -1,12 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue"; /*//import Contact from "./views/Contact.vue"; ... beide verschoven, zodat ze pas gebeuren
- als aangesproken. Zie lager//import Aanmelden from "./views/Aanmelden.vue"
-*/ 
+import Home from "./views/Home.vue";
+import store from "./store";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -24,6 +23,32 @@ export default new Router({
       path: "/aanmelden",
       name: "aanmelden",
       component: () => import("./views/Aanmelden.vue")
+    },
+    {
+      path: "/boeken",
+      name: "boeken",
+      meta: {
+        auth: true
+      },
+      component: () => import("./views/Boeken.vue")
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(path => path.meta.auth)) {
+    if (!store.state.auth.huidigeGebruiker) {
+      next({
+        name: "aanmelden",
+        query: {
+          type: to.query.type,
+          redirect: to.name
+        }
+      });
+    }
+  }
+
+  next();
+});
+
+export default router;

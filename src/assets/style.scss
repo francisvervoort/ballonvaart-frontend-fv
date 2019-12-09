@@ -1,0 +1,16 @@
+.gradient {
+    background: linear-gradient(90deg, #337cd5 0%, #66db9f 100%);
+  }
+
+  .button-gradient {
+    background: linear-gradient(90deg, #337cd5 0%, #66db9f 100%);    
+    @apply text-white  font-bold rounded-full py-4 px-8 shadow opacity-75;
+    
+    &:focus {
+      @apply outline-none shadow-outline;
+    }
+  
+    &:hover {
+      @apply text-gray-800;
+    } 
+  }

@@ -22,11 +22,13 @@
         <p class="text-2xl mb-8">
           Boek een onvergetelijke reis door de wolken!
         </p>
-        <button
+        <router-link
+          tag="button"
           class="mx-auto lg:mx-0 bg-white text-gray-800 font-bold rounded-full my-2 py-4 px-8 shadow-lg"
+          :to="{ name: 'boeken' }"
         >
           BOEKEN
-        </button>
+        </router-link>
       </div>
     </header>
     <main>
@@ -84,18 +86,22 @@
         </h2>
         <div class="container mx-auto w-full px-4 md:px-none">
           <!-- Kaarten -->
-          <ul class="w-full px-2 flex flex-col md:flex-row flex-wrap">
+          <ul
+            class="w-full px-2 flex flex-col md:flex-row flex-wrap justify-around"
+          >
             <li
               class="md:w-1/3 lg:w-1/4 px-2 py-2 flex"
               v-for="vaart of ballonvaarten"
               :key="vaart.titel"
             >
               <ballon-card class="flex-grow" :inhoud="vaart">
-                <button
-                  class="gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg"
+                <router-link
+                  tag="button"
+                  class="button-gradient my-6"
+                  :to="getLink(vaart.type)"
                 >
                   BOEKEN
-                </button>
+                </router-link>
               </ballon-card>
             </li>
           </ul>
@@ -118,20 +124,15 @@ export default {
       ballonvaarten: [
         {
           titel: "Classic",
+          type: "classic",
           beschrijving:
-            "Neem deel aan een groepsvaart met ambiance en prachtige zichten.",
+            "Geniet met vrienden en kennissen van een ballonvlucht met ambiance en prachtige zichten.",
           afbeeldingNaam: "classic.jpg",
-          prijs: 45
-        },
-        {
-          titel: "Privé",
-          beschrijving:
-            "Maak een ballonvlucht met een zelfgekozen groep van vrienden en familie.",
-          afbeeldingNaam: "prive.jpg",
           prijs: 200
         },
         {
           titel: "Ontbijt",
+          type: "ontbijt",
           beschrijving:
             "Ga de lucht in bij zonsopgang en geniet van een lekker ontbijt.",
           afbeeldingNaam: "ontbijt.jpg",
@@ -139,13 +140,24 @@ export default {
         },
         {
           titel: "Luxe",
+          type: "luxe",
           beschrijving:
-            "Geniet van een luxe ballonvlucht met bubbels en snacks!",
+            "Kies voor een luxe ballonvlucht met bubbels en snacks!",
           afbeeldingNaam: "luxe.jpg",
           prijs: 280
         }
       ]
     };
+  },
+  methods: {
+    getLink(type) {
+      return {
+        name: "boeken",
+        query: {
+          type
+        }
+      };
+    }
   }
 };
 </script>

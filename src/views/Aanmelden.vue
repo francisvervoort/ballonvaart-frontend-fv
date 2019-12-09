@@ -48,10 +48,7 @@
             </p>
           </div>
           <div class="mt-6 flex justify-between items-center">
-            <button
-              ref="buttonAanmelden"
-              class="button-gradient font-bold rounded-full py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline"
-            >
+            <button ref="buttonAanmelden" class="button-gradient">
               Inloggen
             </button>
             <button class="text-blue-600">
@@ -90,10 +87,7 @@
               Geef een geldig e-mailadres op.
             </p>
           </div>
-          <button
-            ref="buttonRegistreren"
-            class="mt-4 button-gradient font-bold rounded-full py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline"
-          >
+          <button ref="buttonRegistreren" class="mt-4 button-gradient">
             Verder
           </button>
         </form>
@@ -140,11 +134,20 @@ export default {
   methods: {
     async aanmelden() {
       try {
-        const data = await this.$axios.post("auth/aanmelden", {
+        await this.$store.dispatch("auth/aanmelden", {
           email: this.formAanmelden.email,
           wachtwoord: this.formAanmelden.wachtwoord
         });
-        console.log(data);
+        const { redirect, ...query } = this.$router.currentRoute.query;
+        // if (redirect) {
+        //   this.$router.push({ name: redirect, query });
+        // } else {
+        //   this.$router.push({ name: "home" });
+        // }
+
+        this.$router.push(
+          redirect ? { name: redirect, query } : { name: "home" }
+        );
       } catch (err) {
         this.$toasted.show("Fout bij aanmelden", {
           theme: "bubble",

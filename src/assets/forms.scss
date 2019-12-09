@@ -1,0 +1,13 @@
+.input-standard {
+  @apply py-2 px-3 shadow appearance-none border rounded text-gray-800;
+
+  &:focus {
+    @apply outline-none shadow-outline;
+  }
+  
+  &:disabled {
+    @apply bg-gray-200 opacity-75 text-gray-600;
+  }
+}
+
+  
